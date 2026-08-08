@@ -9,5 +9,17 @@
  * @author oscar
  */
 public class Jugador {
+    private String nombre;
+    private int puntos;
+    
+    public Jugador(String nombre){
+        this.nombre = nombre;
+        puntos = 0 ;
+    }
+
+    public String getNombre(){
+        return nombre;
+    }
+
     
 }
