@@ -29,7 +29,24 @@ public class GUI extends JFrame{
     private Jugador jugador2;
     
     private void crearPanelJuego(){
+        panelJuego = new JPanel();
+        panelJuego.setLayout(new BorderLayout(10,10));
         
+        JPanel panelJugadores = new JPanel(new GridLayout(1,2));
+        
+        JLabel jug1 = new JLabel(jugador1.getNombre() + " - Puntos: 0", SwingConstants.CENTER);
+        JLabel jug2 = new JLabel(jugador2.getNombre() + " - Puntos: 0", SwingConstants.CENTER);
+    
+        panelJugadores.add(jug1);
+        panelJugadores.add(jug2);
+        
+        panelJuego.add(panelJugadores, BorderLayout.NORTH);
+        
+        
+        remove(panelInicio);
+        add(panelJuego);
+        revalidate();
+        repaint();
     }
     
     private void iniciarPartida(){
