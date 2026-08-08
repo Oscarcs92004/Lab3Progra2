@@ -19,21 +19,24 @@ public abstract class Carta extends JButton {
     protected boolean descubierta;
     protected int alto;
     protected int ancho;
+    protected Controlador controlador;
 
-    public Carta(String id, String rutaFrente, String rutaOculta, int alto, int ancho) {
+    public Carta(String id, String rutaFrente, String rutaOculta, int alto, int ancho, Controlador controlador) {
         this.id = id;
         this.rutaFrente = rutaFrente;
         this.rutaOculta = rutaOculta;
         this.descubierta = false;
         this.alto = alto;
         this.ancho= ancho;
+        this.controlador= controlador;
 
 
         setFocusPainted(false);
         setBorderPainted(true);
 
 
-        Mostrar();
+        ocultar();
+        agregarActionListener();
     }
 
     public boolean IsDescubierta() {
@@ -72,6 +75,22 @@ public abstract class Carta extends JButton {
         Image escala = origen.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         return new ImageIcon(escala);
     }
+    
+    
+    private void agregarActionListener() {
+        addActionListener(e -> {
+            if (descubierta) {
+                return;
+            }
+
+            if (!isEnabled()) {
+                return;
+            }
+
+            controlador.procesarClick(this);
+        });
+    }
+
 }
 
     
