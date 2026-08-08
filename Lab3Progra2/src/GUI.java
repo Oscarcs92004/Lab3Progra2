@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +23,32 @@ public class GUI extends JFrame{
     private JTextField txtJug2;
     private JButton iniciar;
     private JButton salir;
+    private JPanel panelInicio;
+    private JPanel panelJuego;
+    private Jugador jugador1;
+    private Jugador jugador2;
+    
+    private void crearPanelJuego(){
+        
+    }
+    
+    private void iniciarPartida(){
+        String nombre1 = txtJug1.getText().trim();
+        String nombre2 = txtJug1.getText().trim();
+    
+        if(nombre1.isEmpty() || nombre2.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Error: Debe ingresar el nombre de ambos jugadores.");
+            return;
+        }
+        jugador1 = new Jugador(nombre1);
+        jugador2 = new Jugador(nombre2);
+        
+        crearPanelJuego();
+    }
     
     private void inicializarComponentes(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout(10,10));
+        panelInicio = new JPanel();
+        panelInicio.setLayout(new BorderLayout(10,10));
         JLabel titulo = new JLabel("Pokemon Memory Game", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 28));
         JPanel panelJugadores = new JPanel();
@@ -48,10 +71,14 @@ public class GUI extends JFrame{
         panelJugadores.add(txtJug2);
         panelBotones.add(iniciar);
         panelBotones.add(salir);
-        panel.add(titulo, BorderLayout.NORTH);
-        panel.add(panelJugadores,BorderLayout.CENTER);
-        panel.add(panelBotones, BorderLayout.SOUTH);
-        add(panel);
+        panelInicio.add(titulo, BorderLayout.NORTH);
+        panelInicio.add(panelJugadores,BorderLayout.CENTER);
+        panelInicio.add(panelBotones, BorderLayout.SOUTH);
+        add(panelInicio);
+        
+        salir.addActionListener(e-> { System.exit(0);});
+        iniciar.addActionListener(e-> iniciarPartida());
+        
     }
     
     public GUI(){
