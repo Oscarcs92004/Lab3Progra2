@@ -13,8 +13,8 @@ import java.awt. *;
 public class CasillaNormal extends Carta{
 
 
-    public CasillaNormal(String id, String rutaFrente, String rutaOculta, int alto, int ancho) {
-        super(id, rutaFrente, rutaOculta, alto, ancho);
+    public CasillaNormal(String id, String rutaFrente, String rutaOculta, int alto, int ancho,Controlador controlador) {
+        super(id, rutaFrente, rutaOculta, alto, ancho, controlador);
     }
 
     public int getPuntaje() {

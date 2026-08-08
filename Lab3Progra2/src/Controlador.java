@@ -51,16 +51,16 @@ public class Controlador implements LogicaJuego, GestionTurnos {
 
             String rutaFrente = "/Imagenes/" + normales[i] + ".png";
 
-            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100));
-            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100));
+            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100, this));
+            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100, this));
         }
 
         for (int i = 0; i < especiales.length; i++) {
 
             String rutaFrente = "/Imagenes/" + especiales[i] + ".png";
 
-            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100));
-            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100));
+            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100, this));
+            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100, this));
         }
     }
 

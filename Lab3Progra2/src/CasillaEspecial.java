@@ -12,8 +12,8 @@ import java.awt.*;
 public class CasillaEspecial extends Carta {
     
 
-    public CasillaEspecial(String id, String rutaFrente, String rutaOculta, int alto, int ancho) {
-        super(id, rutaFrente, rutaOculta, alto, ancho);
+    public CasillaEspecial(String id, String rutaFrente, String rutaOculta, int alto, int ancho, Controlador controlador) {
+        super(id, rutaFrente, rutaOculta, alto, ancho, controlador);
     }
 
     @Override
