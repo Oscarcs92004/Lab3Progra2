@@ -33,11 +33,12 @@ public class GUI extends JFrame{
     private Jugador jugador1;
     private Jugador jugador2;
     private JLabel mensaje;
-    
+    private Controlador controlador;
+    private JPanel panelContenedor;
     
     private void inicializarPaneles(){
         
-        JPanel panelContenedor = new JPanel(new BorderLayout());
+        panelContenedor = new JPanel(new BorderLayout());
         panelContenedor.setOpaque(false);
 
         mensaje = new JLabel(" ");
@@ -57,23 +58,25 @@ public class GUI extends JFrame{
         
         JPanel panelJugadores = new JPanel(new GridLayout(1,2));
         
-        JLabel jug1 = new JLabel(jugador1.getNombre() + " - Puntos: 0", SwingConstants.CENTER);
-        JLabel jug2 = new JLabel(jugador2.getNombre() + " - Puntos: 0", SwingConstants.CENTER);
+        JLabel jug1 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: 0", SwingConstants.CENTER);
+        JLabel jug2 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: 0", SwingConstants.CENTER);
     
         panelJugadores.add(jug1);
         panelJugadores.add(jug2);
         
         panelJuego.add(panelJugadores, BorderLayout.NORTH);
         
+        inicializartablero(controlador.getTablero(),900,650);
         
-        remove(panelInicio);
-        add(panelJuego);
-        revalidate();
-        repaint();
+        panelJuego.add(panelTablero,BorderLayout.CENTER);
+        
+        panelContenedor.removeAll();
+        panelContenedor.add(panelJuego,BorderLayout.CENTER);
+        panelContenedor.revalidate();
+        panelContenedor.repaint();
     }
     private void inicializartablero(Carta[][] tablero,  int anchoPanel,int altoPanel){
         
-
         int filas = tablero.length;
         int columnas = tablero[0].length;
 
@@ -106,9 +109,8 @@ public class GUI extends JFrame{
             mensaje.setText("Error: Debe ingresar el nombre de ambos jugadores.");
             return;
         }
-        jugador1 = new Jugador(nombre1);
-        jugador2 = new Jugador(nombre2);
-        
+        controlador = new Controlador(nombre1,nombre2);
+        controlador.iniciarJuego();
         crearPanelJuego();
     }
     
