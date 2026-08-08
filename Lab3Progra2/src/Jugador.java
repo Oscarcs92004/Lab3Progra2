@@ -25,8 +25,9 @@ public class Jugador {
         return puntos;
     }
     
-    public void sumarPunto(){
+    public void sumarPunto(Carta carta){
         //dependiendo de la carta 
+        puntos += carta.getPuntaje();
     }
     
     public void reiniciarPuntos(){
