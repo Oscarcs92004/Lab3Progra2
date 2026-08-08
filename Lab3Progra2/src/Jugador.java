@@ -33,7 +33,7 @@ public class Jugador {
         cantAciertos++;
     }
     
-    public int getCantAciertis(){
+    public int getCantAciertos(){
         return cantAciertos;
     }
     

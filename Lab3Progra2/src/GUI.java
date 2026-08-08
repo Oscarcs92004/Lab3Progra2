@@ -35,6 +35,20 @@ public class GUI extends JFrame{
     private JLabel mensaje;
     private Controlador controlador;
     private JPanel panelContenedor;
+    private JLabel jug1;
+    private JLabel jug1Aciertos;
+    private JLabel jug2;
+    private JLabel jug2Aciertos;
+    
+    public void actualizarPuntaje(){
+        jug1.setText(controlador.getJugador1().getNombre() + " - Puntos: " + controlador.getJugador1().getPuntos());
+        jug1Aciertos.setText("Cantidad de aciertos de "+ controlador.getJugador1().getNombre()+ " : " + + controlador.getJugador1().getCantAciertos());
+        jug2.setText(controlador.getJugador2().getNombre() + " - Puntos: " + controlador.getJugador2().getPuntos());
+        jug2Aciertos.setText("Cantidad de aciertos de "+ controlador.getJugador2().getNombre()+ " : " + + controlador.getJugador2().getCantAciertos());
+        
+        panelJuego.revalidate();
+        panelJuego.repaint();
+    }
     
     private void inicializarPaneles(){
         
@@ -56,11 +70,15 @@ public class GUI extends JFrame{
         panelJuego = new JPanel();
         panelJuego.setLayout(new BorderLayout(10,10));
         
-        JPanel panelJugadores = new JPanel(new GridLayout(1,2));
+        JPanel panelJugadores = new JPanel(new GridLayout(2,2));
         
-        JLabel jug1 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: 0", SwingConstants.CENTER);
-        JLabel jug2 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: 0", SwingConstants.CENTER);
-    
+        jug1 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: " + controlador.getJugador1().getPuntos(), SwingConstants.CENTER);
+        jug1Aciertos = new JLabel("Cantidad de aciertos de "+ controlador.getJugador1().getNombre()+ " : " + + controlador.getJugador1().getCantAciertos(), SwingConstants.CENTER);
+        jug2 = new JLabel(controlador.getJugador1().getNombre() + " - Puntos: " + controlador.getJugador1().getPuntos(), SwingConstants.CENTER);
+        jug2Aciertos = new JLabel("Cantidad de aciertos de "+ controlador.getJugador2().getNombre()+ " : " + + controlador.getJugador2().getCantAciertos(), SwingConstants.CENTER);
+       
+        panelJugadores.add(jug1Aciertos);
+        panelJugadores.add(jug2Aciertos);
         panelJugadores.add(jug1);
         panelJugadores.add(jug2);
         
@@ -96,20 +114,17 @@ public class GUI extends JFrame{
                 panelTablero.add(carta);
             }
         }
-
-       //add o return de ese jpanel
-
     }
     
     private void iniciarPartida(){
         String nombre1 = txtJug1.getText().trim();
-        String nombre2 = txtJug1.getText().trim();
+        String nombre2 = txtJug2.getText().trim();
     
         if(nombre1.isEmpty() || nombre2.isEmpty()){
             mensaje.setText("Error: Debe ingresar el nombre de ambos jugadores.");
             return;
         }
-        controlador = new Controlador(nombre1,nombre2);
+        controlador = new Controlador(nombre1,nombre2,this);
         controlador.iniciarJuego();
         crearPanelJuego();
     }

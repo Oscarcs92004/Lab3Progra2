@@ -11,15 +11,16 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     private int parejasEncontradas;
     private Carta primeraCarta;
     private Carta segundaCarta;
+    private GUI gui;
 
-    public Controlador(String nombre1, String nombre2) {
+    public Controlador(String nombre1, String nombre2, GUI gui) {
         jugador1 = new Jugador(nombre1);
         jugador2 = new Jugador(nombre2);
         jugadorActual = jugador1;
         tablero = new Carta[6][6];
         listaCartas = new ArrayList<>();
         parejasEncontradas = 0;
-         
+        this.gui = gui;
     }
 
     @Override
@@ -199,6 +200,9 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         if (segundaCarta == null) {
             segundaCarta = carta;
             compararCartas();
+            if(gui != null){
+                gui.actualizarPuntaje();
+            }
         }
     }
     private void compararCartas() {
