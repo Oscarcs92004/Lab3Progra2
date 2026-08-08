@@ -94,6 +94,9 @@ public class Controlador implements LogicaJuego, GestionTurnos {
             jugadorActual = jugador1;
         }
     }
+    public String GetjugadorActual(){
+        return jugadorActual.getNombre();
+    }
 
     @Override
     public boolean verificarPareja(Carta carta1, Carta carta2) {
@@ -127,12 +130,13 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         primeraCarta = null;
         segundaCarta = null;
 
-        cambiarTurno();
+        
             
             
         });
         tiempo.setRepeats(false);
         tiempo.start();
+        cambiarTurno();
 
         
     }

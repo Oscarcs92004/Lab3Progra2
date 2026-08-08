@@ -46,7 +46,7 @@ public class GUI extends JFrame{
         jug1Aciertos.setText("Cantidad de aciertos de "+ controlador.getJugador1().getNombre()+ " : " + + controlador.getJugador1().getCantAciertos());
         jug2.setText(controlador.getJugador2().getNombre() + " - Puntos: " + controlador.getJugador2().getPuntos());
         jug2Aciertos.setText("Cantidad de aciertos de "+ controlador.getJugador2().getNombre()+ " : " + + controlador.getJugador2().getCantAciertos());
-        turno.setText("Turno de: " + controlador.obtenerJugadorActual().getNombre());
+        turno.setText("Turno de: " + controlador.GetjugadorActual());
         
         panelJuego.revalidate();
         panelJuego.repaint();
