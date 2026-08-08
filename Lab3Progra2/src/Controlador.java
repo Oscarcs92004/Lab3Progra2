@@ -12,11 +12,8 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     private int parejasEncontradas;
     private Carta primeraCarta;
     private Carta segundaCarta;
-<<<<<<< HEAD
-    private GUI gui;
-=======
     private Timer tiempo;
->>>>>>> bba6ba394ad6701e578e0755c23f0453758a597e
+    private GUI gui;
 
     public Controlador(String nombre1, String nombre2, GUI gui) {
         jugador1 = new Jugador(nombre1);
