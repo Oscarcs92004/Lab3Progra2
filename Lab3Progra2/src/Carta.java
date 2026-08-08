@@ -58,7 +58,7 @@ public abstract class Carta extends JButton {
     public void ocultar() {
         setIcon(escalarImagen(rutaOculta));
         descubierta = false;
-        setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        setBorder(BorderFactory.createLineBorder(Color.GRAY, 10));
         setText("");
     }
 

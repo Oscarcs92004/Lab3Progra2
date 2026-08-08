@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.Timer;
 
 public class Controlador implements LogicaJuego, GestionTurnos {
 
@@ -11,7 +12,11 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     private int parejasEncontradas;
     private Carta primeraCarta;
     private Carta segundaCarta;
+<<<<<<< HEAD
     private GUI gui;
+=======
+    private Timer tiempo;
+>>>>>>> bba6ba394ad6701e578e0755c23f0453758a597e
 
     public Controlador(String nombre1, String nombre2, GUI gui) {
         jugador1 = new Jugador(nombre1);
@@ -34,6 +39,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         crearCartas();
         Collections.shuffle(listaCartas);
         llenarTablero();
+        
 
         
     }
@@ -112,17 +118,29 @@ public class Controlador implements LogicaJuego, GestionTurnos {
             jugadorActual.sumarPunto(carta1);
             parejasEncontradas++;
 
-            carta1.setEnabled(false);
-            carta2.setEnabled(false);
+            
+            primeraCarta = null;
+            segundaCarta = null;
         }
     }
 
     public void parejaIncorrecta(Carta carta1, Carta carta2) {
-
-        carta1.ocultar();
+        
+        tiempo = new Timer(1500, ev -> {
+            
+            carta1.ocultar();
         carta2.ocultar();
+        primeraCarta = null;
+        segundaCarta = null;
 
         cambiarTurno();
+            
+            
+        });
+        tiempo.setRepeats(false);
+        tiempo.start();
+
+        
     }
 
     @Override
@@ -190,15 +208,19 @@ public class Controlador implements LogicaJuego, GestionTurnos {
             return;
         }
 
-        carta.Mostrar();
+        
+        
+        
 
         if (primeraCarta == null) {
             primeraCarta = carta;
+            carta.Mostrar();
             return;
         }
 
         if (segundaCarta == null) {
             segundaCarta = carta;
+            carta.Mostrar();
             compararCartas();
             if(gui != null){
                 gui.actualizarPuntaje();
@@ -212,7 +234,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
             parejaIncorrecta(primeraCarta, segundaCarta);
         }
 
-        primeraCarta = null;
-        segundaCarta = null;
+        
     }
+    
 }

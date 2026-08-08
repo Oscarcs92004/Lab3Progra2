@@ -19,7 +19,7 @@ public class CasillaEspecial extends Carta {
     @Override
     public void Mostrar() {
         super.Mostrar();
-        setBorder(BorderFactory.createLineBorder(Color.YELLOW, 3));
+        setBorder(BorderFactory.createLineBorder(Color.YELLOW, 15));
         
     }
 
