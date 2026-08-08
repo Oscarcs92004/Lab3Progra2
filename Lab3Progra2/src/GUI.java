@@ -103,7 +103,7 @@ public class GUI extends JFrame{
     
     private void iniciarPartida(){
         String nombre1 = txtJug1.getText().trim();
-        String nombre2 = txtJug1.getText().trim();
+        String nombre2 = txtJug2.getText().trim();
     
         if(nombre1.isEmpty() || nombre2.isEmpty()){
             mensaje.setText("Error: Debe ingresar el nombre de ambos jugadores.");
