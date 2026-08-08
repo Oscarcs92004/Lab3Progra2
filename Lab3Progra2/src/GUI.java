@@ -27,6 +27,24 @@ public class GUI extends JFrame{
     private JPanel panelJuego;
     private Jugador jugador1;
     private Jugador jugador2;
+    private JLabel mensaje;
+    
+    
+    private void inicializarPaneles(){
+        
+        JPanel panelContenedor = new JPanel(new BorderLayout());
+        panelContenedor.setOpaque(false);
+
+        mensaje = new JLabel(" ");
+
+        mensaje.setFont(new Font("Arial", Font.PLAIN, 12));
+        mensaje.setHorizontalAlignment(SwingConstants.CENTER);
+
+        panelContenedor.add(panelInicio, BorderLayout.CENTER);
+        panelContenedor.add(mensaje, BorderLayout.SOUTH);
+
+        add(panelContenedor, BorderLayout.CENTER);
+    }
     
     private void crearPanelJuego(){
         panelJuego = new JPanel();
@@ -54,7 +72,7 @@ public class GUI extends JFrame{
         String nombre2 = txtJug1.getText().trim();
     
         if(nombre1.isEmpty() || nombre2.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Error: Debe ingresar el nombre de ambos jugadores.");
+            mensaje.setText("Error: Debe ingresar el nombre de ambos jugadores.");
             return;
         }
         jugador1 = new Jugador(nombre1);
@@ -91,7 +109,7 @@ public class GUI extends JFrame{
         panelInicio.add(titulo, BorderLayout.NORTH);
         panelInicio.add(panelJugadores,BorderLayout.CENTER);
         panelInicio.add(panelBotones, BorderLayout.SOUTH);
-        add(panelInicio);
+        
         
         salir.addActionListener(e-> { System.exit(0);});
         iniciar.addActionListener(e-> iniciarPartida());
@@ -103,8 +121,10 @@ public class GUI extends JFrame{
         setSize(1200,900);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         inicializarComponentes();
+        inicializarPaneles();
         setVisible(true);
     }
 }
