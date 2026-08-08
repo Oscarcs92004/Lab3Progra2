@@ -13,6 +13,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Insets;
+
 
 /**
  *
@@ -25,6 +29,7 @@ public class GUI extends JFrame{
     private JButton salir;
     private JPanel panelInicio;
     private JPanel panelJuego;
+    private JPanel panelTablero;
     private Jugador jugador1;
     private Jugador jugador2;
     private JLabel mensaje;
@@ -65,6 +70,32 @@ public class GUI extends JFrame{
         add(panelJuego);
         revalidate();
         repaint();
+    }
+    private void inicializartablero(Carta[][] tablero,  int anchoPanel,int altoPanel){
+        
+
+        int filas = tablero.length;
+        int columnas = tablero[0].length;
+
+        panelTablero = new JPanel(  new GridLayout(filas, columnas, 10, 10));
+
+        panelTablero.setPreferredSize(new Dimension(anchoPanel, altoPanel) );
+
+        panelTablero.setOpaque(false);
+
+        for (int fila = 0; fila < filas; fila++) {
+            for (int columna = 0; columna < columnas; columna++) {
+                Carta carta = tablero[fila][columna];
+
+                carta.setFocusPainted(false);
+                carta.setMargin(new Insets(0, 0, 0, 0));
+
+                panelTablero.add(carta);
+            }
+        }
+
+       //add o return de ese jpanel
+
     }
     
     private void iniciarPartida(){
