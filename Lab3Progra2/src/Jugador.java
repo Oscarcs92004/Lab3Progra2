@@ -11,10 +11,12 @@
 public class Jugador {
     private String nombre;
     private int puntos;
+    private int cantAciertos;
     
     public Jugador(String nombre){
         this.nombre = nombre;
         puntos = 0 ;
+        cantAciertos = 0;
     }
 
     public String getNombre(){
@@ -28,6 +30,11 @@ public class Jugador {
     public void sumarPunto(Carta carta){
         //dependiendo de la carta 
         puntos += carta.getPuntaje();
+        cantAciertos++;
+    }
+    
+    public int getCantAciertis(){
+        return cantAciertos;
     }
     
     public void reiniciarPuntos(){
