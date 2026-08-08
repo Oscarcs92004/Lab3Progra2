@@ -20,7 +20,7 @@ public abstract class Carta extends JButton {
     protected int alto;
     protected int ancho;
 
-    protected Carta(String id, String rutaFrente, String rutaOculta, int alto, int ancho) {
+    public Carta(String id, String rutaFrente, String rutaOculta, int alto, int ancho) {
         this.id = id;
         this.rutaFrente = rutaFrente;
         this.rutaOculta = rutaOculta;
