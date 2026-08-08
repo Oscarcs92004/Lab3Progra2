@@ -1,4 +1,5 @@
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Controlador implements LogicaJuego, GestionTurnos {
 
@@ -6,6 +7,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     private Jugador jugador2;
     private Jugador jugadorActual;
     private Carta[][] tablero;
+    private ArrayList<Carta> listaCartas;
     private int parejasEncontradas;
 
     public Controlador(String nombre1, String nombre2) {
@@ -13,6 +15,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         jugador2 = new Jugador(nombre2);
         jugadorActual = jugador1;
         tablero = new Carta[6][6];
+        listaCartas = new ArrayList<>();
         parejasEncontradas = 0;
     }
 
@@ -23,74 +26,46 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         jugadorActual = jugador1;
         parejasEncontradas = 0;
 
-        Carta[] cartas = crearCartas();
-
-        mezclarCartas(cartas);
-
-        cargarTablero(cartas);
+        crearCartas();
+        Collections.shuffle(listaCartas);
+        llenarTablero();
     }
 
-    private Carta[] crearCartas() {
+    public void crearCartas() {
 
-        Carta[] cartas = new Carta[36];
+        listaCartas.clear();
 
-        String[] normales = {"bulbasaur", "charmander", "dwebble", "eevee", "lickitung", "pajaro1", "pajaro2", "pajaro3", "rata1", "rata2", "serpiente1", "serpiente2"};
+        String[] normales = {"blastoise", "bulbasaur", "charmander", "charmeleon", "clefable", "dwebble", "eevee", "haunter", "lickitung", "pajaro1", "pajaro2", "pajaro3", "rata1", "rata2", "serpiente1", "serpiente2"};
 
-        String[] especiales = {"blastoise", "charmeleon", "clefable", "haunter", "pikachu", "raichu"};
+        String[] especiales = {"pikachu", "raichu"};
 
         String rutaOculta = "/Imagenes/pantalla.png";
-
-        int posicion = 0;
 
         for (int i = 0; i < normales.length; i++) {
 
             String rutaFrente = "/Imagenes/" + normales[i] + ".png";
 
-            cartas[posicion] = new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100);
-            posicion++;
-
-            cartas[posicion] = new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100);
-            posicion++;
+            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100));
+            listaCartas.add(new CasillaNormal(normales[i], rutaFrente, rutaOculta, 100, 100));
         }
 
         for (int i = 0; i < especiales.length; i++) {
 
             String rutaFrente = "/Imagenes/" + especiales[i] + ".png";
 
-            cartas[posicion] = new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100);
-            posicion++;
-
-            cartas[posicion] = new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100);
-            posicion++;
-        }
-
-        return cartas;
-    }
-
-    private void mezclarCartas(Carta[] cartas) {
-
-        Random random = new Random();
-
-        for (int i = 0; i < cartas.length; i++) {
-
-            int posicion = random.nextInt(cartas.length);
-
-            Carta temporal = cartas[i];
-            cartas[i] = cartas[posicion];
-            cartas[posicion] = temporal;
+            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100));
+            listaCartas.add(new CasillaEspecial(especiales[i], rutaFrente, rutaOculta, 100, 100));
         }
     }
 
-    private void cargarTablero(Carta[] cartas) {
+    public void llenarTablero() {
 
         int posicion = 0;
 
         for (int fila = 0; fila < 6; fila++) {
-
             for (int columna = 0; columna < 6; columna++) {
 
-                tablero[fila][columna] = cartas[posicion];
-
+                tablero[fila][columna] = listaCartas.get(posicion);
                 tablero[fila][columna].ocultar();
 
                 posicion++;
@@ -128,7 +103,6 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         if (verificarPareja(carta1, carta2)) {
 
             jugadorActual.sumarPunto(carta1);
-
             parejasEncontradas++;
 
             carta1.setEnabled(false);
@@ -174,17 +148,18 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     public Carta getCarta(int fila, int columna) {
 
         try {
-
             return tablero[fila][columna];
-
         } catch (ArrayIndexOutOfBoundsException e) {
-
             return null;
         }
     }
 
     public Carta[][] getTablero() {
         return tablero;
+    }
+
+    public ArrayList<Carta> getListaCartas() {
+        return listaCartas;
     }
 
     public Jugador getJugador1() {
