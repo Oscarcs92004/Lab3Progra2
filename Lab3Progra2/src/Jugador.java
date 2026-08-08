@@ -21,5 +21,16 @@ public class Jugador {
         return nombre;
     }
 
+    public int getPuntos(){
+        return puntos;
+    }
+    
+    public void sumarPunto(){
+        //dependiendo de la carta 
+    }
+    
+    public void reiniciarPuntos(){
+        puntos = 0;
+    }
     
 }
