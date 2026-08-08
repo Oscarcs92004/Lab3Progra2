@@ -36,9 +36,6 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         crearCartas();
         Collections.shuffle(listaCartas);
         llenarTablero();
-        
-
-        
     }
 
     public void crearCartas() {
