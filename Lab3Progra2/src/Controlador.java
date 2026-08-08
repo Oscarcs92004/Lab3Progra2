@@ -9,6 +9,8 @@ public class Controlador implements LogicaJuego, GestionTurnos {
     private Carta[][] tablero;
     private ArrayList<Carta> listaCartas;
     private int parejasEncontradas;
+    private Carta primeraCarta;
+    private Carta segundaCarta;
 
     public Controlador(String nombre1, String nombre2) {
         jugador1 = new Jugador(nombre1);
@@ -17,6 +19,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         tablero = new Carta[6][6];
         listaCartas = new ArrayList<>();
         parejasEncontradas = 0;
+         
     }
 
     @Override
@@ -25,10 +28,13 @@ public class Controlador implements LogicaJuego, GestionTurnos {
         jugador2.reiniciarPuntos();
         jugadorActual = jugador1;
         parejasEncontradas = 0;
-
+        primeraCarta = null;
+        segundaCarta = null;
         crearCartas();
         Collections.shuffle(listaCartas);
         llenarTablero();
+
+        
     }
 
     public void crearCartas() {
@@ -149,7 +155,7 @@ public class Controlador implements LogicaJuego, GestionTurnos {
 
         try {
             return tablero[fila][columna];
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -172,5 +178,37 @@ public class Controlador implements LogicaJuego, GestionTurnos {
 
     public int getParejasEncontradas() {
         return parejasEncontradas;
+    }
+    
+    public void procesarClick(Carta carta) {
+        if (carta == null) {
+            return;
+        }
+
+        if (carta.IsDescubierta()) {
+            return;
+        }
+
+        carta.Mostrar();
+
+        if (primeraCarta == null) {
+            primeraCarta = carta;
+            return;
+        }
+
+        if (segundaCarta == null) {
+            segundaCarta = carta;
+            compararCartas();
+        }
+    }
+    private void compararCartas() {
+        if (verificarPareja(primeraCarta, segundaCarta)) {
+            registrarPareja(primeraCarta, segundaCarta);
+        } else {
+            parejaIncorrecta(primeraCarta, segundaCarta);
+        }
+
+        primeraCarta = null;
+        segundaCarta = null;
     }
 }
